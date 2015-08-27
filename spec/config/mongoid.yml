@@ -1,0 +1,10 @@
+test:
+  clients:
+    default:
+      database: mongoid_enum_field_test
+      hosts:
+        - localhost:27017
+      options:
+        # In the test environment we lower the max_retries and retry_interval to low amounts for fast failures.
+        max_retries: 1
+        retry_interval: 0
