@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Enum Field for Mongoid}
   spec.description   = %q{Enum Field for Mongoid}
-  spec.homepage      = "https://bitbucket.org/innovativetravel/enumize_mongoid"
+  spec.homepage      = "https://github.com/InnovativeTravel/enumize_mongoid"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
