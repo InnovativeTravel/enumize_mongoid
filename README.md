@@ -1,4 +1,4 @@
-# EnumizeMongoid
+# EnumizeMongoid [![Build Status](https://travis-ci.org/InnovativeTravel/enumize_mongoid.svg)](https://travis-ci.org/InnovativeTravel/enumize_mongoid)
 
 EnumizeMongoid is a gem aimed for Mongoid users, that lets you create your own classes/types representing/encapsulating an enum. There are other great gems out there dealing with enums for Mongoid (like [simple_enum](https://github.com/lwe/simple_enum)) but this one is approaching the problem from another angle.
 
