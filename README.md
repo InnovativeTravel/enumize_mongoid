@@ -1,6 +1,6 @@
 # EnumizeMongoid
 
-EnumizeMongoid is a gem aimed for Mongoid users, that lets you create your own classes/types representing/encapsuluating an enum. There are other great gems out there dealing with enums for Mongoid (like [simple_enum](https://github.com/lwe/simple_enum)) but this one is approaching the problem from another angle.
+EnumizeMongoid is a gem aimed for Mongoid users, that lets you create your own classes/types representing/encapsulating an enum. There are other great gems out there dealing with enums for Mongoid (like [simple_enum](https://github.com/lwe/simple_enum)) but this one is approaching the problem from another angle.
 
 Using this gem you are required to create your own classes for your enum types, but on the other hand you will NOT face inconsistencies like this (using simple_enum):
 
