@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Enum Field for Mongoid}
   spec.homepage      = "https://github.com/InnovativeTravel/enumize_mongoid"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) } + %w(LICENSE README.md)
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
