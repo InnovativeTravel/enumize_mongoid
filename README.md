@@ -2,12 +2,12 @@
 
 EnumizeMongoid is a gem aimed for Mongoid users, that lets you create your own classes/types representing/encapsuluating an enum. There are other great gems out there dealing with enums for Mongoid (like [simple_enum](https://github.com/lwe/simple_enum)) but this one is approaching the problem from another angle.
 
-Using this gem you will are required to create your own classes for your enum types, but on the other hand you will NOT face inconsistencies like this (using simple_enum):
+Using this gem you are required to create your own classes for your enum types, but on the other hand you will NOT face inconsistencies like this (using simple_enum):
 
 ```ruby
 doc = Document.first
 p Document.where(status: doc.status).count
-# 0 - why? because doc.status is a symbol
+# 0 - why? because doc.status returns a symbol, but the :status field is actually an Integer
 ```
 
 ## Installation
@@ -28,7 +28,7 @@ Or install it yourself as:
 
 ## Usage
 
-Include `Enumize::Field` into your class representing the enum, and call `enumize` with the appropriate values:
+Include `EnumizeMongoid::Field` into your class representing the enum, and call `enumize` with the appropriate values:
 
 ```ruby
 class Status
@@ -52,32 +52,40 @@ After that you can use it in various flexible ways:
 
 ### Document creation
 ```ruby
-RedBall.create(status: :bouncing)
-RedBall.create(status: Status::BOUNCING)
-RedBall.create(status: 0)
-RedBall.create(status: Status.new(:bouncing))
+RedBall.create(status: :bouncing) # value as symbol
+RedBall.create(status: Status::BOUNCING) # value as constant
+RedBall.create(status: 0) # value as Integer
+RedBall.create(status: Status.new(:bouncing)) # value as an instance of Status
 ```
 
 ### Document querying
 ```ruby
-RedBall.where(status: :bouncing)
-RedBall.where(status: Status::BOUNCING)
-RedBall.where(status: 0)
-RedBall.where(status: Status.new(:bouncing))
+rb = RedBall.create(status: :bouncing)
+
+RedBall.where(status: :bouncing).count # 1
+RedBall.where(status: Status::BOUNCING).count # 1
+RedBall.where(status: 0).count # 1
+RedBall.where(status: Status.new(:bouncing)).count # 1
 ```
 
 ### Comparing values
 ```ruby
-rb = RedBall.where(status: :bouncing).first
+RedBall.where(status: :bouncing).first
 
 rb.status == :bouncing # true
 rb.status == Status::BOUNCING # true
 rb.status == 0 # true
-rb.status == Status.new(:bouncing)
+rb.status == Status.new(:bouncing) # true
 ```
 
+Of course this solves the problem with inconsistencies mentioned in the introduction:
+```ruby
+rb = RedBall.create(status: :bouncing)
+p RedBall.where(status: rb.status).count
+# 1 - rb.status is an instance of Status, which can be passed as part of a selector
+```
 
-#### enumize(values, create_constants: false)
+#### How to use `enumize(values, create_constants: false)`
 
 `values`:
   * array of symbols: `[:bouncing, :still]` - In this case the order matters, as the index of the value will be the value saved in the database: `:bouncing` -> 0, `:still` -> 1
@@ -88,8 +96,6 @@ rb.status == Status.new(:bouncing)
   * a constant for each value:
     * `Status::BOUNCING` -> `0`
     * `Status::STILL` -> `0`
-
-
 
 ## Development
 
